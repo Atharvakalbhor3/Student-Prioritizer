@@ -3,12 +3,12 @@
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@supabase/supabase-js'
 
-// Simple server client using anon key – no server-side auth checks
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-// studentId will be passed from the client (Supabase Auth user.id)
+
 export async function submitAssignment(
   studentId,
   studentName,
@@ -63,7 +63,7 @@ export async function getSubmissions() {
   }
 }
 
-// Called from student page; studentId is passed from client
+
 export async function getStudentSubmissions(studentId) {
   try {
     const { data, error } = await supabase
