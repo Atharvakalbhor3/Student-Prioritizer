@@ -1,102 +1,72 @@
 # Student Prioritizer
 
-A Next.js application that helps teachers manage student assignment submissions by prioritizing them based on who submitted first.
+Student Prioritizer is a small full-stack web application I built using **Next.js, Tailwind CSS and Supabase** for my college assessment.
+The idea came from a real problem I personally noticed in engineering college — during assignment or practical submissions there is always a huge crowd near the teacher and it becomes difficult to track who came first. Sometimes students who arrive later get their work checked earlier.
 
-## Features
+This project solves that issue by creating a simple **priority-based submission system** where students submit details online and teachers can check assignments in the exact order they were received.
 
-- **Landing Page**: Welcome page with login/signup options
-- **Student Portal**: Students can submit assignment details (name, roll number, subject, assignment name)
-- **Teacher Portal**: Teachers can view submissions in priority order (first come, first served)
-- **Priority System**: Automatic numbering (1, 2, 3...) based on submission order
-- **Assignment Checking**: Teachers can mark assignments as checked with a green tick
-- **Notes System**: Teachers can add notes for each student, visible to the student
-- **Server Actions**: All CRUD operations use Next.js Server Actions (no API routes)
+---
 
-## Setup Instructions
+## What this project does
 
-### 1. Install Dependencies
-```bash
+* Students can submit assignment details from their dashboard.
+* Each submission automatically gets a **priority number** based on time.
+* Teachers can see a clear ordered list (first come, first served).
+* Teachers can mark assignments as **checked** and add notes.
+* Students can see real-time status and notes without repeatedly asking the teacher.
+
+---
+
+## 🛠️ Tech Stack
+
+* Next.js (App Router)
+* React
+* Tailwind CSS
+* Supabase (Database + Backend)
+* Vercel (Deployment)
+
+---
+
+## ⚙️ How to run locally
+
+1. Install dependencies
+
+```
 npm install
 ```
 
-### 2. Set up Supabase
+2. Create `.env.local` file and add your Supabase keys:
 
-**Detailed instructions are in `SUPABASE_SETUP.md`**
-
-Quick steps:
-1. Create a new project at [supabase.com](https://supabase.com)
-2. Get your Supabase URL and anon key from Project Settings > API
-3. Create a `.env.local` file in the root directory:
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
 ```
 
-### 3. Database Schema
+3. Run development server
 
-Run the SQL from `database_schema.sql` file in your Supabase SQL Editor.
-
-**Tables Created:**
-- `users` - Stores student and teacher accounts
-- `submissions` - Stores assignment submissions with priority numbers
-
-**Key Fields:**
-- `priority` - Auto-incremented number (1, 2, 3...) based on submission order
-- `is_checked` - Boolean flag for teacher to mark as checked
-- `note` - Text field for teacher's notes
-
-### 4. Run the Development Server
-
-```bash
+```
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000)
 
-## Usage Flow
+---
 
-1. **Landing Page**: Visit the home page to see welcome message
-2. **Sign Up**: Create an account as either a student or teacher
-3. **Student Flow**:
-   - Login as student
-   - Fill form with: Name, Roll No, Subject, Assignment Name
-   - Submit assignment (gets priority number automatically)
-   - View submissions and teacher notes
-4. **Teacher Flow**:
-   - Login as teacher
-   - See all submissions in priority order (1, 2, 3...)
-   - Click "Mark as Checked" to add green tick
-   - Add notes for students
-   - Notes are visible to students
+## 📂 Project Structure (Important Files)
 
-## Project Structure
+* `app/actions.js` → Server actions for database operations
+* `app/student/page.jsx` → Student dashboard
+* `app/teacher/page.jsx` → Teacher dashboard
+* `lib/supabase.js` → Supabase client setup
 
-```
-├── app/
-│   ├── actions.js          # Server actions for CRUD operations
-│   ├── layout.jsx          # Root layout
-│   ├── page.jsx            # Landing page
-│   ├── login/page.jsx      # Login page
-│   ├── signup/page.jsx     # Signup page
-│   ├── student/page.jsx    # Student dashboard
-│   └── teacher/page.jsx    # Teacher dashboard
-├── lib/
-│   └── supabase.js         # Supabase client
-├── database_schema.sql     # SQL schema file
-└── SUPABASE_SETUP.md       # Detailed setup guide
-```
+---
 
-## Technologies Used
+## 💡 Why I built this
 
-- **Next.js 14** - React framework with App Router
-- **React** - UI library
-- **Supabase** - Database (use Table Editor UI, no SQL needed!)
-- **Tailwind CSS** - Styling
-- **Server Actions** - For all database operations (no API routes)
+In real college submissions:
 
-## Important Notes
+* Teachers cannot manage crowd order.
+* Students keep asking "Sir/Ma'am, is my assignment checked?"
+* No transparency in checking process.
 
-⚠️ **This is a demo project for assessment purposes.**
-- Passwords are stored in plain text (use proper authentication in production)
-- No Row Level Security (RLS) policies implemented
-- Suitable for demonstration and learning purposes
+This project tries to make that workflow more organized, fair and less stressful for both teachers and students.
